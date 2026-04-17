@@ -7,9 +7,9 @@ type FeatureCardProps = {
 
 const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
-    <Card sx={{ bgcolor: "secondary.main", color: "secondary.contrastText", flex: 1 }}>
+    <Card sx={{ bgcolor: "secondary.main", color: "secondary.contrastText", display: "flex", justifyContent: "center", alignItems: "center", flex: 1}}>
       <CardContent sx={{p: 4}}>
-        <Stack spacing={4} direction="column">
+        <Stack spacing={4} direction="column" >
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             {icon}
           </Box>

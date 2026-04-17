@@ -13,7 +13,7 @@ type HeaderProps = {
 
 const Header = ({ navLinks }: HeaderProps) => {
   return (
-    <AppBar position="static" component="header" sx={{ py: 1 }}>
+    <AppBar position="static" component="header" elevation={0} sx={{ py: 1 }} >
       <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
         <Stack direction="row" sx={{ alignItems: "center", gap: 3, mx:5 }}>
           <ComputerRoundedIcon sx={{ fontSize: "2.25rem" }} />
