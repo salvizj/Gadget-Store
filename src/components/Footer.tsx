@@ -7,8 +7,8 @@ type FooterProps = {
 const Footer = ({text}: FooterProps) => {
 	return (
     <>
-      <Box component="footer" sx={{ bgcolor: "primary.main", color: "primary.contrastText", py: 2 }}>
-        <Typography color="inherit" sx={{ display: "inline-block", mx: 4 }}>
+      <Box component="footer" sx={{ bgcolor: "primary.main", color: "primary.contrastText", py: 3.2 }}>
+        <Typography color="inherit" sx={{  fontSize: "1.3rem", fontWeight: 600, ml: 8, letterSpacing: 0.5 }}>
           {text}
         </Typography>
       </Box>
