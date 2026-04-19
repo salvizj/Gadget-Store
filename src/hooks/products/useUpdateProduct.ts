@@ -1,11 +1,11 @@
 import { useState } from "react"
 import type { Product } from "../../types/products"
 
-const useUpdateProduct = () => {
+const useUpdateProduct = (refetch: () => void) => {
   const url = import.meta.env.VITE_URL || "http://localhost:3000"
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
+  
   const updateProduct = async (product: Product) => {
     try {
       setLoading(true)
@@ -14,7 +14,11 @@ const useUpdateProduct = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(product)
       })
+      if (!response.ok) {
+        throw new Error("Failed to update product")
+      }
       const data = await response.json()
+      refetch()
       return data
     } catch (error) {
       setError("Failed to update product")

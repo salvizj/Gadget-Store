@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import type { Product } from "../../types/products"
 
 const useProduct = (id: string | undefined) => {
@@ -7,30 +7,31 @@ const useProduct = (id: string | undefined) => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    if (!id) {
-      setError("Product ID is required")
+  const fetchProduct = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch(`${url}/products/${id}`)
+      const product = await response.json()
+      setProduct(product)
+    } catch (error) {
+      setError("Failed to fetch product")
+      throw error
+    } finally {
       setLoading(false)
-      return
     }
-    const fetchProduct = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch(`${url}/products/${id}`)
-        const product = await response.json()
-        setProduct(product)
-      } catch (error) {
-        setError("Failed to fetch product")
-        throw error
-      } finally {
-        setLoading(false)
-      }
-    }
+  }
 
+  if (!id) {
+    setError("Product ID is required")
+    setLoading(false)
+    return { product: null, error: "Product ID is required", loading: false, fetchProduct: fetchProduct}
+  }
+
+  useEffect(() => {
     fetchProduct()
   }, [url, id])
 
-  return { product, error, loading }
+  return { product, error, loading, fetchProduct }
 }
 
 export default useProduct

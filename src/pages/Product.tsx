@@ -1,15 +1,28 @@
-import { Container, Typography, Stack, Button, Card, CardMedia, CardActions, CardContent, Box } from "@mui/material"
+import { Container, Typography, Stack, Button, Card, CardMedia, CardActions, CardContent, Box, ClickAwayListener } from "@mui/material"
 import { useParams } from "react-router";
 import FeatureList from "../components/Products/FeatureList"
 import { ProductImgPathFromTitle } from "../utils/productUtils";
 import Specs from "../components/Products/Specs"
 import useProduct from "../hooks/products/useProduct";
+import MenuCard from "../components/Products/MenuCard";
+import { useState } from "react";
+import Form from "../components/Products/Form";
+import useUpdateProduct from "../hooks/products/useUpdateProduct";
+import useDeleteProduct from "../hooks/products/useDeleteProduct";
 
 const Product = () => {
   const { id } = useParams()
-  const { product, error, loading } = useProduct(id)
+  const { product, error: productError, loading: productLoading, fetchProduct: refetch } = useProduct(id)
 
-  if (loading) {
+  const { updateProduct, loading: updateLoading, error: updateError } = useUpdateProduct(refetch)
+  const { deleteProduct, loading: deleteLoading, error: deleteError } = useDeleteProduct(refetch)
+
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [isUpdateFormOpen, setIsUpdateFormOpen] = useState(false)
+
+
+
+  if (productLoading || updateLoading || deleteLoading) {
     return (
       <>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
@@ -19,11 +32,11 @@ const Product = () => {
     )
   }
 
-  if (error) {
+  if (productError || updateError || deleteError) {
     return (
       <>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-          <Typography variant="h2">Error: {error}</Typography>
+          <Typography variant="h2">Error: {productError || updateError || deleteError}</Typography>
         </Box>
       </>
     )
@@ -41,8 +54,12 @@ const Product = () => {
 
   return (
     <>
+      {isUpdateFormOpen && product && (
+        <Form closeForm={() => setIsUpdateFormOpen(false)} actionBtnText="Update" onUpdate={updateProduct} product={product} />
+      )}
+
       <Container component="section" maxWidth="xl" sx={{ mb: 14, mt: 8 }}>
-        <Card elevation={1} sx={{ px: 8, pb: 4, display: "flex", flexDirection: { xs: "column", md: "row-reverse" } }}>
+        <Card elevation={1} sx={{ px: 12, py: 5, display: "flex", flexDirection: { xs: "column", md: "row-reverse" } }}>
 
           <CardMedia component="img" sx={{ maxHeight: "550px", width: "auto" }} image={ProductImgPathFromTitle(product.title)} alt={product.title} object-fit="contain" >
           </CardMedia>
@@ -50,24 +67,35 @@ const Product = () => {
           <CardContent sx={{
             display: "flex", flex: 1, flexDirection: "column", alignItems: "start", width: "50%"
           }}>
-            <Stack direction="column" spacing={4}>
+
+            <Stack direction="column" spacing={5}>
               <Typography variant="h4" gutterBottom>
                 {product.title}
               </Typography>
-              <Typography gutterBottom sx={{ color: "secondary.text", fontWeight: 400, fontSize: "1rem", lineHeight: 1.875, letterSpacing: "0.25px" }}>
+              <Typography gutterBottom sx={{ color: "secondary.text", fontWeight: 400, fontSize: "1rem", lineHeight: 1.875, letterSpacing: "0.25px", maxWidth: "70%" }}>
                 {product.long_description}
               </Typography>
               <Specs product={product} />
             </Stack>
-            <FeatureList features={product.features} />
-            <Typography variant="h5" gutterBottom>
+            <FeatureList features={product.features ?? []} />
+            <Typography variant="h5" gutterBottom sx={{ py: 4 }}>
               Price: {product.price}€
             </Typography>
 
-            <CardActions sx={{ display: "flex", gap: 4, justifyContent: "start" }}>
-              <Button variant="outlined">Menu</Button>
-              <Button variant="contained">Add to Cart</Button>
-            </CardActions>
+            <Box sx={{ position: "relative" }}>
+              <CardActions sx={{ display: "flex", gap: 4, alignItems: "center", p: 0 }}>
+                <Button variant="outlined" onClick={() => setMenuOpen(true)}>Menu</Button>
+                <Button variant="contained">Add to Cart</Button>
+              </CardActions>
+
+              {menuOpen && (
+                <ClickAwayListener onClickAway={() => setMenuOpen(false)}>
+                  <Box sx={{ position: "absolute", zIndex: 20, p: 2, bgcolor: "#ffffff", boxShadow: 2, top: 0 }}>
+                    <MenuCard product={product} onEditClick={() => setIsUpdateFormOpen(true)} onDeleteClick={() => deleteProduct(id as string)} closeMenu={() => setMenuOpen(false)} />
+                  </Box>
+                </ClickAwayListener>
+              )}
+            </Box>
           </CardContent>
         </Card >
       </Container >

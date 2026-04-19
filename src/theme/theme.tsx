@@ -94,6 +94,9 @@ const theme = createTheme({
           fontSize: "1.25rem",
           padding: "11px 24px",
         },
+        outlined: {
+          borderColor: "#00000033",
+        }
       },
     },
   },

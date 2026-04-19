@@ -8,14 +8,7 @@
       "long_description": " This smartwatch offers a range of features including fitness tracking, notifications, and voice commands. Its long-lasting battery and durable design make it perfect for everyday wear. ",
       "year": 2022,
       "RAM": "1GB",
-      "warranty_period": "2 years",
-      "features": [
-        "Fitness tracking",
-        "Notifications",
-        "Voice commands",
-        "Long battery life",
-        "Durable design"
-      ]
+      "warranty_period": "2 years"
     },
     {
       "id": "2",
@@ -25,14 +18,7 @@
       "long_description": "This laptop is packed with features for both work and play. Its powerful processor and graphics card make it perfect for demanding applications, while its sleek design and long battery life make it great for travel and entertainment.",
       "year": 2023,
       "RAM": "16GB",
-      "warranty_period": "2 years",
-      "features": [
-        "Intel Core i7 processor",
-        "NVIDIA graphics",
-        "15-inch display",
-        "Backlit keyboard",
-        "Fast charging"
-      ]
+      "warranty_period": "2 years"
     },
     {
       "id": "3",
@@ -135,16 +121,6 @@
         "Adjustable clip",
         "Compatible with Windows and Mac"
       ]
-    },
-    {
-      "title": "d",
-      "price": "2",
-      "short_description": "d",
-      "long_description": "d",
-      "year": "2",
-      "RAM": "dsd",
-      "warranty_period": "sds",
-      "id": "HIH7Zbvb5W4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

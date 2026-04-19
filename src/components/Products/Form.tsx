@@ -22,7 +22,8 @@ const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormPro
     long_description: product?.long_description ?? "",
     year: product?.year ?? 0,
     RAM: product?.RAM ?? "",
-    warranty_period: product?.warranty_period ?? ""
+    warranty_period: product?.warranty_period ?? "",
+    ...(isUpdate && { features: product?.features ?? [] })
   })
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +73,6 @@ const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormPro
               <TextField name="warranty_period" label="Warrenty period" value={formData.warranty_period} onChange={onChange} />
             </Stack>
           </CardContent>
-
 
           <CardActions sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
             <Button variant="outlined" onClick={closeForm}>Cancel</Button>
