@@ -1,3 +1,7 @@
+export type CartItem = {
+	product: Product
+	quantity: number
+}
 export type Product = {
 	id: number
 	title: string
@@ -19,4 +23,8 @@ export type CreateProduct = {
 	year: number
 	RAM: string
 	warranty_period: string
+}
+export type NavLink = {
+	title: string
+	path: string
 }

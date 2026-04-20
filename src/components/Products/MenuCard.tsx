@@ -1,5 +1,5 @@
 import { Button, Stack } from "@mui/material"
-import type { Product } from "../../types/products"
+import type { Product } from "../../types/types"
 
 type MenuCardProps = {
   product: Product
