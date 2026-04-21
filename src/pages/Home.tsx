@@ -39,7 +39,15 @@ const Home = () => {
 						Why Choose Us?
 					</Typography>
 
-					<Stack direction={{ xs: "column", md: "row" }} spacing={8}>
+					<Stack
+						direction={{ xs: "column", md: "row" }}
+						spacing={8}
+						sx={{
+							justifyContent: "center",
+							alignItems: { xs: "center", md: "stretch" },
+							height: "100%",
+						}}
+					>
 						{Features.map((feature, index) => (
 							<FeatureCard
 								key={index}

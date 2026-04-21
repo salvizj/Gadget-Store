@@ -77,7 +77,7 @@ const CartCard = ({ product, quantity }: CartCardProps) => {
 						color="text.secondary"
 						sx={{ whiteSpace: "nowrap" }}
 					>
-						Total: ${product.price * quantity}
+						Total: ${(product.price * quantity).toFixed(2)}
 					</Typography>
 				</CardContent>
 			</Card>

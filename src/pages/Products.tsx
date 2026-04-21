@@ -119,7 +119,7 @@ const Products = () => {
 					<Box
 						sx={{
 							display: "flex",
-							justifyContent: "end",
+							justifyContent: { xs: "center", md: "end" },
 							alignItems: "center",
 						}}
 					>

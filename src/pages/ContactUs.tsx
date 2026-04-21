@@ -29,7 +29,7 @@ const ContactUs = () => {
 				}}
 			>
 				<Stack direction={{ xs: "column", md: "row" }} spacing={14}>
-					<Box sx={{ width: "100%", maxWidth: "750px" }}>
+					<Box sx={{ maxWidth: "750px" }}>
 						<Stack direction="column" spacing={12}>
 							<Typography variant="h2">
 								Contact us by Phone, Email, or Vaisit us in our Officee
@@ -39,7 +39,7 @@ const ContactUs = () => {
 								<Typography variant="body1">
 									Our address: Station Nord 23456, Greenland
 								</Typography>
-								<Box sx={{ maxWidth: "750px", width: "100%" }}>
+								<Box sx={{ height: "320px" }}>
 									<IframeMap />
 								</Box>
 							</Stack>
@@ -47,10 +47,10 @@ const ContactUs = () => {
 					</Box>
 
 					<Stack
-						direction={{ xs: "row", md: "column" }}
+						direction="column"
 						spacing={4}
 						sx={{
-							alignItems: "stretch",
+							alignItems: { xs: "center", md: "stretch" },
 							justifyContent: "center",
 						}}
 					>

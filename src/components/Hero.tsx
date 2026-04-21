@@ -14,10 +14,10 @@ const Hero = () => {
 				}}
 			>
 				<Stack
-					spacing={4}
-					direction={{ xs: "column", md: "row" }}
+					spacing={{ xs: 0, lg: 4 }}
+					direction={{ lg: "row" }}
 					sx={{
-						pt: { xs: 10, md: 10, lg: 0 },
+						py: { xs: 10, lg: 0 },
 						justifyContent: "center",
 						justifyItems: "center",
 						alignItems: "stretch",
@@ -28,11 +28,12 @@ const Hero = () => {
 						spacing={4}
 						direction="column"
 						sx={{
-              justifyContent: "center",
-              alignItems: { xs: "center", md: "flex-start" },
+							justifyContent: "center",
+							alignItems: { xs: "center", md: "flex-start" },
+							maxWidth: "560px",
 						}}
 					>
-						<Stack spacing={4} direction="column" sx={{ maxWidth: "560px" }}>
+						<Stack spacing={4} direction="column">
 							<Typography variant="h2">
 								Experience the Future of Technology Today!
 							</Typography>
@@ -53,10 +54,9 @@ const Hero = () => {
 							spacing={3}
 							direction="row"
 							sx={{
-								width: "100%",
 								textTransform: "uppercase",
 								justifyContent: "flex-start",
-								alignItems: { xs: "center", md: "flex-start" },
+								alignItems: "center",
 							}}
 						>
 							<Button
@@ -94,7 +94,7 @@ const Hero = () => {
 
 					<Box
 						sx={{
-							display: { xs: "none", md: "flex" },
+							display: { xs: "none", lg: "flex" },
 							justifyContent: "flex-end",
 							alignItems: "center",
 							width: "100%",
@@ -108,6 +108,7 @@ const Hero = () => {
 							sx={{
 								maxWidth: "600px",
 								maxHeight: "700px",
+								width: "100%",
 							}}
 						/>
 					</Box>
