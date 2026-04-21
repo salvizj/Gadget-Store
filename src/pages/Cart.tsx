@@ -1,8 +1,9 @@
-import { Container, Stack, Typography, Card, Button, Box } from "@mui/material"
+import { Stack, Typography, Card, Button, Box } from "@mui/material"
 import { useSelector } from "react-redux"
 import type { RootState } from "../store/store"
 import CartCard from "../components/Cart/CartCard"
 import { Link } from "react-router"
+import PageContainer from "../components/PageContainer"
 
 const Cart = () => {
 	const totalSum = useSelector((state: RootState) =>
@@ -19,11 +20,9 @@ const Cart = () => {
 
 	if (itemCount === 0) {
 		return (
-			<Container
-				maxWidth={false}
+			<PageContainer
 				sx={{
 					py: 14,
-					maxWidth: "80%vw",
 				}}
 			>
 				<Box
@@ -70,13 +69,13 @@ const Cart = () => {
 						</Typography>
 					</Stack>
 				</Card>
-			</Container>
+			</PageContainer>
 		)
 	}
 
 	return (
 		<>
-			<Container maxWidth={false} sx={{ py: 4, maxWidth: "80vw" }}>
+			<PageContainer sx={{ py: 4 }}>
 				<Stack
 					direction="row"
 					sx={{ justifyContent: "space-between", alignItems: "center", py: 10 }}
@@ -91,7 +90,7 @@ const Cart = () => {
 					)}
 				</Stack>
 
-				<Stack direction="column" sx={{ gap: 6 }}>
+				<Stack direction="column" sx={{ gap: 6, width: "100%" }}>
 					{itemsInCart.map((item) => (
 						<CartCard
 							key={item.product.id}
@@ -100,7 +99,7 @@ const Cart = () => {
 						/>
 					))}
 				</Stack>
-			</Container>
+			</PageContainer>
 		</>
 	)
 }

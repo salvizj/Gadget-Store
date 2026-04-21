@@ -1,4 +1,4 @@
-import { Typography, Grid, Container, Stack, Button, Box } from "@mui/material"
+import { Typography, Grid, Stack, Button, Box } from "@mui/material"
 import ProductCard from "../components/Products/ProductCard"
 import useProducts from "../hooks/products/useProducts"
 import { useState } from "react"
@@ -8,6 +8,7 @@ import useUpdateProduct from "../hooks/products/useUpdateProduct"
 import useDeleteProduct from "../hooks/products/useDeleteProduct"
 import type { Product } from "../types/types"
 import AddIcon from "@mui/icons-material/Add"
+import PageContainer from "../components/PageContainer"
 
 const Products = () => {
 	const [isCreateFormOpen, setIsCreateFormOpen] = useState(false)
@@ -113,11 +114,7 @@ const Products = () => {
 				/>
 			)}
 
-			<Container
-				component="section"
-				maxWidth={false}
-				sx={{ py: 10, maxWidth: "80vw" }}
-			>
+			<PageContainer sx={{ py: 10 }}>
 				<Stack spacing={8} direction="column">
 					<Box
 						sx={{
@@ -155,7 +152,7 @@ const Products = () => {
 						))}
 					</Grid>
 				</Stack>
-			</Container>
+			</PageContainer>
 		</>
 	)
 }

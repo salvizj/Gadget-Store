@@ -84,15 +84,9 @@ const theme = createTheme({
 		body2: {
 			fontSize: "0.875rem",
 			fontWeight: 400,
-			color: "text.secondary",
+			color: "#00000099",
 			letterSpacing: "0.25px",
 			lineHeight: 1.43,
-		},
-		subtitle1: {
-			fontSize: "1rem",
-			fontWeight: 400,
-			lineHeight: 1.5,
-			letterSpacing: "0.15px",
 		},
 		subtitle2: {
 			fontSize: "0.875rem",
@@ -100,6 +94,7 @@ const theme = createTheme({
 			lineHeight: 1.57,
 		},
 	},
+
 	components: {
 		MuiButton: {
 			styleOverrides: {

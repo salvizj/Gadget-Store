@@ -3,6 +3,7 @@ import IframeMap from "../components/IframeMap"
 import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined"
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined"
 import { Typography, Stack, Box } from "@mui/material"
+import PageContainer from "../components/PageContainer"
 
 const ContactUs = () => {
 	const Features = [
@@ -19,14 +20,15 @@ const ContactUs = () => {
 	]
 	return (
 		<>
-			<Box
-				sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+			<PageContainer
+				sx={{
+					py: 14,
+					display: "flex",
+					justifyContent: "flex-start",
+					alignItems: "center",
+				}}
 			>
-				<Stack
-					direction={{ xs: "column", md: "row" }}
-					spacing={14}
-					sx={{ py: 12, width: "90%" }}
-				>
+				<Stack direction={{ xs: "column", md: "row" }} spacing={14}>
 					<Box sx={{ width: "100%", maxWidth: "750px" }}>
 						<Stack direction="column" spacing={12}>
 							<Typography variant="h2">
@@ -62,7 +64,7 @@ const ContactUs = () => {
 						))}
 					</Stack>
 				</Stack>
-			</Box>
+			</PageContainer>
 		</>
 	)
 }

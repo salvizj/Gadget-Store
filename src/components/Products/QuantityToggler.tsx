@@ -16,6 +16,14 @@ const QuantityToggler = ({
 	onIncrementClick,
 	onDecrementClick,
 }: QuantityTogglerProps) => {
+	const buttonStyles = {
+		cursor: "pointer",
+		width: "45px",
+		minWidth: "45px",
+		minHeight: "48px",
+		height: "48px",
+	}
+
 	return (
 		<>
 			{productAlreadyInCart && (
@@ -25,26 +33,20 @@ const QuantityToggler = ({
 						flexDirection: "row",
 						gap: 2,
 						alignItems: "center",
-						width: "100%",
-						height: "100%",
 					}}
 				>
 					<Button
 						variant="outlined"
-						onClick={() => onDecrementClick()}
-						sx={{
-							cursor: "pointer",
-						}}
+						onClick={onDecrementClick}
+						sx={buttonStyles}
 					>
 						{productInCartCount === 1 ? <TrashIcon /> : <RemoveIcon />}
 					</Button>
 					<Typography variant="counter">{productInCartCount}</Typography>
 					<Button
 						variant="contained"
-						onClick={() => onIncrementClick()}
-						sx={{
-							cursor: "pointer",
-						}}
+						onClick={onIncrementClick}
+						sx={buttonStyles}
 					>
 						<AddIcon />
 					</Button>

@@ -1,5 +1,4 @@
 import {
-	Container,
 	Typography,
 	Stack,
 	Button,
@@ -29,6 +28,7 @@ import {
 import type { RootState } from "../store/store"
 import AddedToCartCard from "../components/Products/AddedToCartCard"
 import QuantityToggler from "../components/Products/QuantityToggler"
+import PageContainer from "../components/PageContainer"
 
 const Product = () => {
 	const { id } = useParams()
@@ -132,26 +132,28 @@ const Product = () => {
 				<AddedToCartCard closeWindow={() => setIsAddedToCartCardOpen(false)} />
 			)}
 
-			<Container
-				component="section"
-				maxWidth={false}
-				sx={{ mb: 14, mt: 8, maxWidth: "80vw" }}
-			>
+			<PageContainer sx={{ mb: 14, mt: 8 }}>
 				<Card
 					elevation={1}
 					sx={{
-						px: 12,
-						py: 5,
+						px: { xs: 2, sm: 4, md: 12 },
+						py: { xs: 3, md: 5 },
 						display: "flex",
-						flexDirection: { xs: "column", md: "row-reverse" },
+						flexDirection: { xs: "column", xl: "row-reverse" },
+						gap: { xs: 3, xl: 0 },
 					}}
 				>
 					<CardMedia
 						component="img"
-						sx={{ maxHeight: "550px", width: "auto" }}
+						sx={{
+							width: { xs: "100%", xl: "auto" },
+							maxWidth: { xs: "100%", xl: "550px" },
+							maxHeight: "550px",
+							objectFit: "contain",
+							selfAlign: "center",
+						}}
 						image={ProductImgPathFromTitle(product.title)}
 						alt={product.title}
-						object-fit="contain"
 					></CardMedia>
 
 					<CardContent
@@ -160,7 +162,8 @@ const Product = () => {
 							flex: 1,
 							flexDirection: "column",
 							alignItems: "start",
-							width: "50%",
+							width: { xs: "100%", xl: "50%" },
+							p: { xs: 0, sm: 2 },
 						}}
 					>
 						<Stack direction="column" spacing={5}>
@@ -175,7 +178,7 @@ const Product = () => {
 									fontSize: "1rem",
 									lineHeight: 1.875,
 									letterSpacing: "0.25px",
-									maxWidth: "70%",
+									maxWidth: { xs: "100%", md: "70%" },
 								}}
 							>
 								{product.long_description}
@@ -193,6 +196,8 @@ const Product = () => {
 									display: "flex",
 									gap: 2,
 									p: 0,
+									minHeight: "48px",
+									height: "48px",
 								}}
 							>
 								<Button variant="outlined" onClick={() => setMenuOpen(true)}>
@@ -247,7 +252,7 @@ const Product = () => {
 						</Box>
 					</CardContent>
 				</Card>
-			</Container>
+			</PageContainer>
 		</>
 	)
 }
