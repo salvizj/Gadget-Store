@@ -1,7 +1,7 @@
 import { useState } from "react"
 import type { ProductFormData } from "../../../types/types"
 
-const useUpdateProduct = (refetch: () => void) => {
+const useUpdateProduct = (refetch: () => Promise<void>) => {
 	const url = import.meta.env.VITE_URL || "http://localhost:3000"
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -18,7 +18,7 @@ const useUpdateProduct = (refetch: () => void) => {
 				throw new Error("Failed to update product")
 			}
 			const data = await response.json()
-			refetch()
+			await refetch()
 			return data
 		} catch (error) {
 			setError("Failed to update product")

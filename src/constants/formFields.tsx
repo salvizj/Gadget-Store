@@ -1,4 +1,4 @@
-export const formFields = [
+export const FORM_FIELDS = [
 	{ name: "title", label: "Title", type: "text" },
 	{ name: "price", label: "Price", type: "number" },
 	{ name: "short_description", label: "Short description", type: "text" },

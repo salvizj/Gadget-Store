@@ -32,3 +32,6 @@ export type NavLink = {
 	title: string
 	path: string
 }
+
+export type ButtonSize = "small" | "medium" | "large"
+export type ButtonVariant = "outlined" | "contained"

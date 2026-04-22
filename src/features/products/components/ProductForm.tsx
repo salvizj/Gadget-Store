@@ -11,14 +11,14 @@ import {
 import type React from "react"
 import { useState } from "react"
 import type { Product, ProductFormData } from "../../../types/types"
-import { formFields } from "../../../constants/formFields"
+import { FORM_FIELDS } from "../../../constants/formFields"
 
 type FormProps = {
 	product?: Product
 	closeForm: () => void
 	actionBtnText: string
-	onCreate?: (product: ProductFormData) => void
-	onUpdate?: (product: ProductFormData) => void
+	onCreate?: (product: ProductFormData) => Promise<void>
+	onUpdate?: (product: ProductFormData) => Promise<void>
 }
 
 const Form = ({
@@ -165,7 +165,7 @@ const Form = ({
 							},
 						}}
 					>
-						{formFields.map((field) => (
+						{FORM_FIELDS.map((field) => (
 							<Stack key={field.name}>
 								<TextField
 									name={field.name}

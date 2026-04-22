@@ -1,4 +1,4 @@
-import { Typography, Grid, Stack, Button, Box } from "@mui/material"
+import { Typography, Grid, Stack, Box } from "@mui/material"
 import ProductCard from "../features/products/components/ProductCard"
 import useProducts from "../features/products/hooks/useProducts"
 import { useState } from "react"
@@ -9,6 +9,7 @@ import useDeleteProduct from "../features/products/hooks/useDeleteProduct"
 import type { Product } from "../types/types"
 import AddIcon from "@mui/icons-material/Add"
 import PageContainer from "../layouts/PageContainer"
+import Button from "../shared/components/Buttons/Button"
 
 const Products = () => {
 	const [isCreateFormOpen, setIsCreateFormOpen] = useState(false)
@@ -126,7 +127,6 @@ const Products = () => {
 						<Button
 							variant="contained"
 							size="large"
-							sx={{ mb: 4, textTransform: "uppercase" }}
 							onClick={() => setIsCreateFormOpen(true)}
 						>
 							<Stack
@@ -149,8 +149,8 @@ const Products = () => {
 							>
 								<ProductCard
 									product={product}
-									onDeleteClick={() =>
-										deleteProduct(product.id as unknown as string)
+									onDeleteClick={async () =>
+										await deleteProduct(product.id as unknown as string)
 									}
 									onEditClick={() => onEditClick(product)}
 								/>

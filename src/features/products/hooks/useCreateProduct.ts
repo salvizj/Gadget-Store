@@ -1,7 +1,7 @@
 import { useState } from "react"
 import type { ProductFormData } from "../../../types/types"
 
-const useCreateProduct = (refetch: () => void) => {
+const useCreateProduct = (refetch: () => Promise<void>) => {
 	const url = import.meta.env.VITE_URL || "http://localhost:3000"
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -18,7 +18,7 @@ const useCreateProduct = (refetch: () => void) => {
 				throw new Error("Failed to create product")
 			}
 			const data = await response.json()
-			refetch()
+			await refetch()
 			return data
 		} catch (error) {
 			setError("Failed to create product")

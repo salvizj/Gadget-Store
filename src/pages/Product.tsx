@@ -1,7 +1,6 @@
 import {
 	Typography,
 	Stack,
-	Button,
 	Card,
 	CardMedia,
 	CardActions,
@@ -24,6 +23,7 @@ import CenteredMessage from "../shared/components/CenteredMessage"
 import ProductSpecs from "../features/products/components/ProductSpecs"
 import QuantityControl from "../shared/components/QuantityControl"
 import ProductContextMenu from "../features/products/components/ProductContextMenu"
+import Button from "../shared/components/Buttons/Button"
 
 const Product = () => {
 	const { id } = useParams()
@@ -155,7 +155,11 @@ const Product = () => {
 									height: "48px",
 								}}
 							>
-								<Button variant="outlined" onClick={() => setMenuOpen(true)}>
+								<Button
+									variant="outlined"
+									size="medium"
+									onClick={() => setMenuOpen(true)}
+								>
 									Menu
 								</Button>
 
@@ -169,6 +173,7 @@ const Product = () => {
 								) : (
 									<Button
 										variant="contained"
+										size="medium"
 										onClick={() => {
 											addToCartClick(product)
 											setIsAddedToCartCardOpen(true)

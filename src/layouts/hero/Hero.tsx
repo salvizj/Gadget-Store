@@ -1,6 +1,7 @@
-import { Box, Button, Typography, Stack } from "@mui/material"
+import { Box, Typography, Stack } from "@mui/material"
 import HeroImage from "../../assets/images/hero_image.png"
 import { Link } from "react-router"
+import Button from "../../shared/components/Buttons/Button"
 
 const Hero = () => {
 	return (
@@ -59,34 +60,10 @@ const Hero = () => {
 								alignItems: "center",
 							}}
 						>
-							<Button
-								variant="outlined"
-								color="primary"
-								component={Link}
-								to="/contact-us"
-								sx={{
-									textTransform: "uppercase",
-									fontWeight: 500,
-									fontSize: "1.25rem",
-									lineHeight: 1.3,
-									letterSpacing: "1.64px",
-								}}
-							>
+							<Button variant="outlined" component={Link} to="/contact-us">
 								Contact Us
 							</Button>
-							<Button
-								variant="contained"
-								color="primary"
-								component={Link}
-								to="/products"
-								sx={{
-									textTransform: "uppercase",
-									fontWeight: 500,
-									fontSize: "1.25rem",
-									lineHeight: 1.3,
-									letterSpacing: "1.84px",
-								}}
-							>
+							<Button variant="contained" component={Link} to="/products">
 								Shop Now
 							</Button>
 						</Stack>
@@ -105,8 +82,8 @@ const Hero = () => {
 							src={HeroImage}
 							alt="Hero Image"
 							sx={{
-								maxWidth: "600px",
-								maxHeight: "700px",
+								width: "600px",
+								height: "700px",
 							}}
 						/>
 					</Box>
