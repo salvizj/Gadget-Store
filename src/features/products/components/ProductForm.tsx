@@ -39,13 +39,17 @@ const Form = ({
 		year: String(product?.year ?? ""),
 		RAM: product?.RAM ?? "",
 		warranty_period: product?.warranty_period ?? "",
-		features: product?.features ?? [],
+		features: product?.features ?? "",
 		image: product?.image ?? "",
 	})
 
 	const [validationErrors, setValidationErrors] = useState<{
 		[key: string]: string
 	}>({})
+
+	const parseFeatures = (features: string): string[] => {
+		return features.split(",").map((f) => f.trim())
+	}
 
 	const validateForm = () => {
 		const errors: { [key: string]: string } = {}
@@ -63,7 +67,10 @@ const Form = ({
 			errors.long_description = "Long description is required"
 		}
 		if (!formData.image) {
-			errors.image = "Image URL is required"
+			errors.image = "Image name is required"
+		}
+		if (formData.image !== formData.title) {
+			errors.image = "Image name need to be the same as title"
 		}
 		if (Number(formData.year) <= 0) {
 			errors.year = "Year must be greater than 0"
@@ -74,7 +81,9 @@ const Form = ({
 		if (!formData.warranty_period) {
 			errors.warranty_period = "Warranty period is required"
 		}
-		if (formData.features.length === 0) {
+		const featuresArray = parseFeatures(formData.features as string)
+
+		if (featuresArray.length === 0 || featuresArray[0] === "") {
 			errors.features = "At least one feature is required"
 		}
 
@@ -82,7 +91,7 @@ const Form = ({
 		return Object.keys(errors).length === 0
 	}
 
-	const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		if (!validateForm()) {
@@ -93,12 +102,16 @@ const Form = ({
 			...formData,
 			price: Number(formData.price),
 			year: Number(formData.year),
+			features:
+				typeof formData.features === "string"
+					? parseFeatures(formData.features)
+					: formData.features,
 		}
 
 		if (isUpdate && onUpdate) {
-			onUpdate(normalizedData as ProductFormData)
+			await onUpdate(normalizedData as ProductFormData)
 		} else if (onCreate) {
-			onCreate(normalizedData as ProductFormData)
+			await onCreate(normalizedData as ProductFormData)
 		}
 
 		closeForm()
@@ -107,21 +120,13 @@ const Form = ({
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 
-		const parsedValue =
-			name === "price" || name === "year" ? Number(value) : value
-
-		setFormData((prev) => ({ ...prev, [name]: parsedValue }))
+		setFormData((prev) => ({ ...prev, [name]: value }))
 
 		setValidationErrors({})
 	}
 
 	const onFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const features = e.target.value
-			.split(",")
-			.map((f) => f.trim())
-			.filter(Boolean)
-
-		setFormData((prev) => ({ ...prev, features }))
+		setFormData((prev) => ({ ...prev, features: e.target.value }))
 
 		setValidationErrors({})
 	}
@@ -166,11 +171,7 @@ const Form = ({
 									name={field.name}
 									label={field.label}
 									type={field.type}
-									value={
-										field.name === "features"
-											? (formData.features as string[]).join(", ")
-											: formData[field.name as keyof typeof formData]
-									}
+									value={formData[field.name as keyof ProductFormData]}
 									onChange={
 										field.name === "features" ? onFeatureChange : onChange
 									}

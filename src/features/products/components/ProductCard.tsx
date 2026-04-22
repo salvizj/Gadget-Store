@@ -33,6 +33,8 @@ const ProductCard = ({
 					display: "flex",
 					flexDirection: "column",
 					overflow: "visible",
+					width: "100%",
+					height: "100%",
 					pb: 4,
 				}}
 			>
@@ -50,12 +52,11 @@ const ProductCard = ({
 					image={ProductImgPathFromTitle(product.title)}
 					alt={product.title}
 					sx={{
-						maxHeight: "310px",
-						maxWidth: "194px",
+						height: "310px",
+						width: "194px",
 						alignSelf: "center",
 					}}
 				/>
-
 				<CardContent sx={{ flex: 1 }}>
 					<Typography variant="body2">{product.short_description}</Typography>
 				</CardContent>

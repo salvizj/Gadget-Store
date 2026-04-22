@@ -143,7 +143,9 @@ const Products = () => {
 							<Grid
 								size={{ xs: 12, sm: 6, md: 3, xl: 3 }}
 								key={product.id}
-								sx={{ display: "flex" }}
+								sx={{
+									display: "flex",
+								}}
 							>
 								<ProductCard
 									product={product}

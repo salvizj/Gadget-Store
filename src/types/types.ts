@@ -25,7 +25,7 @@ export type ProductFormData = {
 	year: string | number
 	RAM: string
 	warranty_period: string
-	features: string[]
+	features: string[] | string
 }
 
 export type NavLink = {
