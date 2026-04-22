@@ -60,10 +60,20 @@ const Hero = () => {
 								alignItems: "center",
 							}}
 						>
-							<Button variant="outlined" component={Link} to="/contact-us">
+							<Button
+								variant="outlined"
+								component={Link}
+								to="/contact-us"
+								size="large"
+							>
 								Contact Us
 							</Button>
-							<Button variant="contained" component={Link} to="/products">
+							<Button
+								variant="contained"
+								component={Link}
+								to="/products"
+								size="large"
+							>
 								Shop Now
 							</Button>
 						</Stack>

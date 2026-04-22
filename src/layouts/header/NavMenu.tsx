@@ -16,7 +16,11 @@ const NavMenu = ({
 	return (
 		<>
 			<Box component="nav">
-				<Stack direction={stackDirection} sx={{ alignItems: alignItems }}>
+				<Stack
+					direction={stackDirection}
+					spacing={2}
+					sx={{ alignItems: alignItems }}
+				>
 					{navLinks.map((link) => (
 						<Button
 							key={link.path}

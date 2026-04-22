@@ -1,5 +1,6 @@
-import { Button, Stack } from "@mui/material"
+import { Stack } from "@mui/material"
 import type { Product } from "../../../types/types"
+import MenuButton from "./MenuButton"
 
 type ProductContextMenuProps = {
 	product: Product
@@ -15,39 +16,32 @@ const ProductContextMenu = ({
 	closeMenu,
 }: ProductContextMenuProps) => {
 	return (
-		<Stack spacing={2}>
-			<Button
-				size="small"
-				variant="text"
+		<Stack
+			spacing={2}
+			sx={{
+				width: "100%",
+				height: "100%",
+				borderRadius: "4px",
+				top: "21px",
+				left: "21px",
+			}}
+		>
+			<MenuButton
 				onClick={() => {
 					onEditClick(product)
 					closeMenu()
 				}}
-				sx={{
-					bgcolor: "#21212114",
-					color: "#000000DE",
-					textTransform: "capitalize",
-					justifyContent: "flex-start",
-				}}
 			>
 				Edit
-			</Button>
-			<Button
-				size="small"
-				variant="text"
+			</MenuButton>
+			<MenuButton
 				onClick={() => {
 					onDeleteClick()
 					closeMenu()
 				}}
-				sx={{
-					bgcolor: "#21212114",
-					color: "#000000DE",
-					textTransform: "capitalize",
-					justifyContent: "flex-start",
-				}}
 			>
 				Delete
-			</Button>
+			</MenuButton>
 		</Stack>
 	)
 }

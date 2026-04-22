@@ -40,7 +40,7 @@ const Form = ({
 		RAM: product?.RAM ?? "",
 		warranty_period: product?.warranty_period ?? "",
 		features: product?.features ?? "",
-		image: product?.image ?? "",
+		image: (product?.image ?? "").split(".")[0] ?? "",
 	})
 
 	const [validationErrors, setValidationErrors] = useState<{

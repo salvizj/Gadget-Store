@@ -3,7 +3,6 @@ import {
 	Card,
 	CardMedia,
 	CardContent,
-	Button,
 	CardActions,
 	ClickAwayListener,
 	Box,
@@ -13,6 +12,7 @@ import { Link } from "react-router"
 import { useState } from "react"
 import type { Product } from "../../../types/types"
 import ProductContextMenu from "./ProductContextMenu"
+import Button from "../../../shared/components/Buttons/Button"
 
 type ProductCardProps = {
 	product: Product
@@ -52,8 +52,9 @@ const ProductCard = ({
 					image={ProductImgPathFromTitle(product.title)}
 					alt={product.title}
 					sx={{
-						height: "310px",
-						width: "194px",
+						maxHeight: "194px",
+						maxWidth: "310px",
+						objectFit: "contain",
 						alignSelf: "center",
 					}}
 				/>
@@ -100,12 +101,14 @@ const ProductCard = ({
 										top: -10,
 									}}
 								>
-									<ProductContextMenu
-										product={product}
-										onEditClick={() => onEditClick(product)}
-										onDeleteClick={onDeleteClick}
-										closeMenu={() => setMenuOpen(false)}
-									/>
+									<Box sx={{ maxWidth: "144px", maxHeight: "160px" }}>
+										<ProductContextMenu
+											product={product}
+											onEditClick={() => onEditClick(product)}
+											onDeleteClick={onDeleteClick}
+											closeMenu={() => setMenuOpen(false)}
+										/>
+									</Box>
 								</Box>
 							</ClickAwayListener>
 						)}
