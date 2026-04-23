@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardActions, CardContent, Stack, TextField, Typography } from "@mui/material"
+import { Box, Card, CardActions, CardContent, Stack, TextField, Typography } from "@mui/material"
 import type React from "react"
 import { useState } from "react"
 import type { Product, ProductFormData } from "../../../types/types"
 import { FORM_FIELDS } from "../../../constants/formFields"
+import Button from "../../../shared/components/Buttons/Button"
 
 type FormProps = {
   product?: Product
@@ -131,6 +132,8 @@ const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormPro
           py: 2,
           px: 10,
           width: { xs: "auto", md: "50%" },
+          overflowY: "auto",
+          maxHeight: "100vh",
         }}
         onSubmit={onSubmit}
       >
@@ -168,10 +171,10 @@ const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormPro
         </CardContent>
 
         <CardActions sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-          <Button variant="outlined" onClick={closeForm}>
+          <Button variant="outlined" onClick={closeForm} size="medium">
             Cancel
           </Button>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" size="medium">
             {actionBtnText}
           </Button>
         </CardActions>
