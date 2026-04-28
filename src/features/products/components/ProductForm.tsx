@@ -1,9 +1,10 @@
 import { Box, Card, CardActions, CardContent, Stack, TextField, Typography } from "@mui/material"
 import type React from "react"
 import { useState } from "react"
-import type { Product, ProductFormData } from "../../../types/types"
+import type { Product } from "../../../types/types"
 import { FORM_FIELDS } from "../../../constants/formFields"
 import Button from "../../../shared/components/Buttons/Button"
+import { productFormSchema, type ProductFormData } from "../../../schemas/productSchema"
 
 type FormProps = {
   product?: Product
@@ -16,7 +17,7 @@ type FormProps = {
 const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormProps) => {
   const isUpdate = !!product
 
-  const [formData, setFormData] = useState<ProductFormData>({
+  const [formData, setFormData] = useState({
     ...(isUpdate && { id: product?.id }),
     title: product?.title ?? "",
     price: String(product?.price ?? ""),
@@ -29,72 +30,25 @@ const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormPro
     image: (product?.image ?? "").split(".")[0] ?? "",
   })
 
-  const [validationErrors, setValidationErrors] = useState<{
-    [key: string]: string
-  }>({})
-
-  const parseFeatures = (features: string): string[] => {
-    return features.split(",").map((f) => f.trim())
-  }
-
-  const validateForm = () => {
-    const errors: { [key: string]: string } = {}
-
-    if (!formData.title) {
-      errors.title = "Title is required"
-    }
-    if (Number(formData.price) <= 0) {
-      errors.price = "Price must be greater than 0"
-    }
-    if (!formData.short_description) {
-      errors.short_description = "Short description is required"
-    }
-    if (!formData.long_description) {
-      errors.long_description = "Long description is required"
-    }
-    if (!formData.image) {
-      errors.image = "Image name is required"
-    }
-    if (formData.image !== formData.title) {
-      errors.image = "Image name need to be the same as title"
-    }
-    if (Number(formData.year) <= 0) {
-      errors.year = "Year must be greater than 0"
-    }
-    if (!formData.RAM) {
-      errors.RAM = "RAM memory is required"
-    }
-    if (!formData.warranty_period) {
-      errors.warranty_period = "Warranty period is required"
-    }
-    const featuresArray = parseFeatures(formData.features as string)
-
-    if (featuresArray.length === 0 || featuresArray[0] === "") {
-      errors.features = "At least one feature is required"
-    }
-
-    setValidationErrors(errors)
-    return Object.keys(errors).length === 0
-  }
+  const [validationErrors, setValidationErrors] = useState<Record<string, string | undefined>>({})
 
   const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!validateForm()) {
+    const result = productFormSchema.safeParse(formData)
+
+    if (!result.success) {
+      console.error("Validation errors:", result.error.issues)
+      const errors = Object.fromEntries(result.error.issues.map((issue) => [issue.path[0], issue.message]))
+
+      setValidationErrors(errors)
       return
     }
 
-    const normalizedData = {
-      ...formData,
-      price: Number(formData.price),
-      year: Number(formData.year),
-      features: typeof formData.features === "string" ? parseFeatures(formData.features) : formData.features,
-    }
-
     if (isUpdate && onUpdate) {
-      await onUpdate(normalizedData as ProductFormData)
+      await onUpdate(result.data)
     } else if (onCreate) {
-      await onCreate(normalizedData as ProductFormData)
+      await onCreate(result.data)
     }
 
     closeForm()
@@ -105,13 +59,13 @@ const Form = ({ product, closeForm, actionBtnText, onCreate, onUpdate }: FormPro
 
     setFormData((prev) => ({ ...prev, [name]: value }))
 
-    setValidationErrors({})
+    setValidationErrors((prev) => ({ ...prev, [name]: undefined }))
   }
 
   const onFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, features: e.target.value }))
 
-    setValidationErrors({})
+    setValidationErrors((prev) => ({ ...prev, features: undefined }))
   }
 
   return (

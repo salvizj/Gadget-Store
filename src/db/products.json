@@ -20,7 +20,9 @@
       "year": 2023,
       "RAM": "2",
       "warranty_period": "dsd",
-      "features": ["sddsd"],
+      "features": [
+        "sddsd"
+      ],
       "image": "ada"
     },
     {
@@ -87,7 +89,13 @@
       "year": 2023,
       "RAM": "4GB",
       "warranty_period": "2 years",
-      "features": ["10.1-inch display", "Fast charging", "Quad-core processor", "Expandable storage", "Dual cameras"]
+      "features": [
+        "10.1-inch display",
+        "Fast charging",
+        "Quad-core processor",
+        "Expandable storage",
+        "Dual cameras"
+      ]
     },
     {
       "id": "7",
